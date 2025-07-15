@@ -13,13 +13,21 @@ services:
       - .env:/app/.env
     env_file:
       - .env
-    command: uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload
+    command: [
+      "uvicorn", 
+      "app.main:app", 
+      "--host", "0.0.0.0", 
+      "--port", "5000", 
+      "--reload", 
+      "--log-level", "debug"
+    ]
+
 
   mongo:
     image: mongo
     restart: always
     ports:
-      - "27018:27017"
+      - "27017:27017"
     volumes:
       - mongo-data:/data/db
 
