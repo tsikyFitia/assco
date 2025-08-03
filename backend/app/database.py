@@ -7,5 +7,4 @@ load_dotenv()
 MONGO_URL = os.getenv("MONGO_URL")
 
 client = AsyncIOMotorClient(MONGO_URL)
-database = client["assco"]
-collection = database["users"]
+db = client["assco"]
