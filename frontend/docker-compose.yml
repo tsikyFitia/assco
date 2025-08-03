@@ -1,0 +1,12 @@
+services:
+  vite-frontend:
+    container_name: vite-frontend
+    build: .
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app                      # Monte le code source local dans /app du conteneur
+      - ./node_modules:/app/node_modules  # Monte node_modules local dans conteneur
+    environment:
+      HOST: 0.0.0.0                 # Vite écoute sur toutes les interfaces (important en Docker)
+      CHOKIDAR_USEPOLLING: "true"   # Hot reload plus fiable sous Docker
