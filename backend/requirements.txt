@@ -6,4 +6,5 @@ pydantic[email]
 python-dotenv
 argon2-cffi
 python-jose[cryptography]
-
+openpyxl
+python-multipart
