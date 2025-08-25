@@ -93,12 +93,17 @@ class Content(BaseModel):
     
 
 
+class Question(BaseModel):
+    question_text: str
+    options: List[str]
+    answer: str
+
 class Exercise(BaseModel):
     title: str
     evaluation_type: str
     author: str
-    questions: List[str]
-    created_at: Optional[datetime]
+    questions: List[Question]
+    created_at: datetime
     subject_id: str
     level_id: str
     creator_id: str

@@ -8,7 +8,8 @@ from app.routes.subject import router as sub_route
 from app.routes.level import router as lev_route
 from app.routes.program import router as prog_route
 from app.routes.content import router as cont_route
-from app.routes.exercise import router as exo_route
+from app.routes.exercise import router as exo_route 
+from app.routes.recommend import router as reco_route
 
 app = FastAPI()
 
@@ -29,7 +30,8 @@ app.include_router(sub_route)
 app.include_router(lev_route)
 app.include_router(prog_route)
 app.include_router(cont_route)
-app.include_router(exo_route)
+app.include_router(exo_route) 
+app.include_router(reco_route) 
 
 # 💡 Modification du schéma OpenAPI pour afficher un champ `Bearer token`
 def custom_openapi():
@@ -55,5 +57,13 @@ def custom_openapi():
     app.openapi_schema = openapi_schema
     return app.openapi_schema
 
+
+ #####################################################################################################
+
+
+#####################################################################################################
+
+
+
 # 🧠 On injecte notre schéma customisé
-app.openapi = custom_openapi
+app.openapi = custom_openapi 

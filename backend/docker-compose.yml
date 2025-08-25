@@ -1,35 +1,45 @@
-version: '3.8'
 
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi_api
     ports:
-      - "5000:5000"
+      - "${API_PORT:-5000}:5000"
     depends_on:
       - mongo
     volumes:
-      - ./app:/app/app
+      - ./app:/app/app           # code source
       - ./requirements.txt:/app/requirements.txt
       - .env:/app/.env
+      - ./uploads:/app/uploads   # fichiers uploadés persistants
+      - pip-cache:/root/.cache/pip  # cache pip pour éviter de retélécharger les dépendances
     env_file:
       - .env
-    command: [
-      "uvicorn", 
-      "app.main:app", 
-      "--host", "0.0.0.0", 
-      "--port", "5000", 
-      "--reload", 
-      "--log-level", "debug"
-    ]
-
+    command: >
+      uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload --log-level debug
+    restart: always
+    networks:
+      - app-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # utile si tu as besoin de resolver DNS local
 
   mongo:
     image: mongo
+    container_name: mongo_db
     restart: always
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    networks:
+      - app-network
 
 volumes:
   mongo-data:
+  pip-cache:  # volume pour le cache pip
+
+networks:
+  app-network:
+    driver: bridge
