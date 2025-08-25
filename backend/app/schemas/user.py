@@ -27,3 +27,4 @@ class ImportedUser(BaseModel):
     institution_id: str
     level_id: Optional[str] = None
     guardian_email: Optional[str] = None
+

@@ -8,3 +8,10 @@ argon2-cffi
 python-jose[cryptography]
 openpyxl
 python-multipart
+pytesseract
+pillow
+torch
+PyMuPDF
+transformers
+sentencepiece
+protobuf
