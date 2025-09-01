@@ -13,6 +13,9 @@ from app.routes.recommend import router as reco_route
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
 # Autoriser le frontend à accéder à l'API
 app.add_middleware(
